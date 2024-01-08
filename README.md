@@ -17,4 +17,4 @@ int main() {
 ## 📜 License
 
 - [asar.hpp](./) - The Unlicensed
-- [SimpleJSON](https://github.com/FelipeIzolan/SimpleJSON) - The Unlicensed
+- [json.hpp](https://github.com/FelipeIzolan/json.hpp/) - The Unlicensed
