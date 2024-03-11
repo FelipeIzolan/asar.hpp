@@ -7,7 +7,7 @@ asar.hpp | C++ asar unpacker library.
 int main() {
   Asar resources("path/to/file.asar");
 
-  std::string data = resources.content("/path/to/file");
+  std::string data = resources.unpack("/path/to/file");
   bool exist = resources.exist("/path/to/file");
 
   return 1;

@@ -1,12 +1,12 @@
 #include <fstream>
 #include <iostream>
-#include "asar.hpp"
+#include "../asar.hpp"
 
 int main() {
   Asar resources("resources.asar");
 
-  std::string data1 = resources.content("/im/not/exist");
-  std::string data2 = resources.content("/assets/image.png");
+  std::string data1 = resources.unpack("/im/not/exist");
+  std::string data2 = resources.unpack("/assets/image.png");
 
   std::cout << data1 << std::endl;
 

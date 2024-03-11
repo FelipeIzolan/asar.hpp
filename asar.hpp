@@ -10,7 +10,7 @@ class Asar {
 
       std::ifstream stream(filename);
 
-      char *size = new char[8];
+      char * size = new char[8];
       stream.read(size, 8);
 
       uint32_t uSize = *(uint32_t*)(size + 4) - 8;
@@ -30,8 +30,8 @@ class Asar {
       stream.close();
     }
 
-    std::string content(const std::string path) {
-      auto * c = resolve_asar_path(path);
+    std::string unpack(const std::string path) {
+      auto * c = resolve(path);
       
       if (!exist(c)) return "";
 
@@ -40,34 +40,34 @@ class Asar {
 
       char * buffer = new char[_size];
       std::ifstream stream(filename, std::ios::binary);
-      std::stringstream content;
+      std::stringstream data;
 
       stream.seekg(offset + _offset);
       stream.read(buffer, _size);
       stream.close();
       
-      content.write(buffer, _size);
+      data.write(buffer, _size);
 
       delete[] buffer;
 
-      return content.str();
+      return data.str();
     }
 
     bool exist(const std::string path) {
-      auto * c = resolve_asar_path(path);
-      return !(c->IsNull());
+      auto * c = resolve(path);
+      return !c->IsNull();
     }
 
     bool exist(const json::JSON * file) {
-      return !(file->IsNull());
+      return !file->IsNull();
     }
 
   protected:
-    std::string filename;
     json::JSON header;
+    std::string filename;
     int offset;
   
-    json::JSON * resolve_asar_path(std::string path) {
+    json::JSON * resolve(std::string path) {
       auto * address = &header.at("files"); 
       int e = path.find('/');
       
